@@ -22,6 +22,10 @@ export interface Product {
     };
   }
   
+ export type PageProps = {
+    params: { slug: string }; 
+  };
+  
 export interface Category {
     params: {category : string}
 }

@@ -5,9 +5,9 @@ import ProductDetailClient from "@/app/components/productdetailclient"; // Clien
 import Customer from "@/app/components/customer";
 import YouMayLike from "@/app/components/productdetail/productyoulike";
 
-interface ProductDetailPageProps {
-  params: { slug: string };
-}
+// type ProductDetailPageProps = {
+//   params: { slug: string }; // ✅ Fixed
+// };
 
 async function getProductDetail(slug: string): Promise<Product | null> {
   return client.fetch(
@@ -24,16 +24,29 @@ async function getProductDetail(slug: string): Promise<Product | null> {
   );
 }
 
-export default async function ProductPage({ params }: ProductDetailPageProps) {
-  const { slug } = params;
+// export default async function ProductPage({ params }: ProductDetailPageProps) {
+//   const { slug } = params; // ✅ No more errors
+//   const product = await getProductDetail(slug);
+
+//   return (
+//     <div className="max-w-full h-full flex-grow justify-start items-center">
+//       {/* Pass product data to the client component */}
+//       <ProductDetailClient product={product} />
+//       <Customer />
+//       <YouMayLike />
+//     </div>
+//   );
+// }
+
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+  const { slug } = params; // ✅ This should now work fine
   const product = await getProductDetail(slug);
 
   return (
     <div className="max-w-full h-full flex-grow justify-start items-center">
-      {/* Pass product data to the client component */}
       <ProductDetailClient product={product} />
-      <Customer/>
-      <YouMayLike/>
+      <Customer />
+      <YouMayLike />
     </div>
   );
 }

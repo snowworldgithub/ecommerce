@@ -1,9 +1,12 @@
+"use client"; // This ensures the component runs on the client side
+
 import { client } from "@/sanity/lib/client";
 import { Product } from "../../../types/products";
 import { groq } from "next-sanity";
 import ProductDetailClient from "@/app/components/productdetailclient"; // Client component
 import Customer from "@/app/components/customer";
 import YouMayLike from "@/app/components/productdetail/productyoulike";
+import React from "react";
 
 interface ProductDetailPageProps {
   params: { slug: string };
@@ -24,16 +27,31 @@ async function getProductDetail(slug: string): Promise<Product | null> {
   );
 }
 
-export default async function ProductPage({ params }: ProductDetailPageProps) {
+export default function ProductPage({ params }: ProductDetailPageProps) {
   const { slug } = params;
-  const product = await getProductDetail(slug);
+  const [product, setProduct] = React.useState<Product | null>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setLoading(true);
+    getProductDetail(slug)
+      .then(setProduct)
+      .finally(() => setLoading(false));
+  }, [slug]);
 
   return (
     <div className="max-w-full h-full flex-grow justify-start items-center">
-      {/* Pass product data to the client component */}
-      <ProductDetailClient product={product} />
-      <Customer/>
-      <YouMayLike/>
+      {loading ? (
+        <p>Loading...</p>
+      ) : product ? (
+        <>
+          <ProductDetailClient product={product} />
+          <Customer />
+          <YouMayLike />
+        </>
+      ) : (
+        <p>Product not found.</p>
+      )}
     </div>
   );
 }

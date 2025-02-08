@@ -14,7 +14,7 @@ const client = createClient({
   projectId: 'zjf7u783',
   dataset: 'production',
   useCdn: true,
-  token: 'sk4JJe9Nz0QKxbU3UqmbZdUjFuXLPVOaCClCNuUatAhrRI56lxwRHNJ2ZgNSIOx0Ocuzmf0BMz4pgxi5QNkM8irIhs08o2FE0j3Rx08jyUoqzSpEhAerbcMJoxujCkFyDtFDo6ZNDsHhtU6octqbTIIm7YRd7SP1nlaWACuSlfllmH9ERGf1',
+  token: 'skmh7pshApr5tgre5XAAgV1lgX75PC5M6PpFfUEtXlny3RSZSfanO9pyWjvTwLlV4TGkWtMsjVYMoQIPkImjec3R1rOe6aAwur0sbYqvH4NUcJYel7Np7pkodjCoBkwCLzoAKOu63gnZUVwtiuWzGaYm9RUqXJqfVdzvyLYSjpWmdmbO9loJ',
   apiVersion: '2025-01-13',
 });
 
@@ -33,7 +33,7 @@ async function uploadImageToSanity(imageUrl) {
     console.error('Failed to upload image:', imageUrl, error);
     return null;
   }
-}
+} 
 
 // Import Data to Sanity
 async function importData() {

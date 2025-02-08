@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "../../../types/products";
+import { Product } from "../../types/products";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
 import { AiFillStar, AiOutlineHeart, AiOutlineStar } from "react-icons/ai";
